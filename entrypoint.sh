@@ -49,6 +49,15 @@ find source/_posts -name "*.md" | while read file; do
   touch -t "$formatted_timestamp" "$file"
 done
 
+# Update npm configuration
+echo ">_ Update npm configuration ..."
+npm config set registry https://registry.npmjs.org
+npm config set strict-ssl false  # Temporarily disable SSL verification
+
+# Update dependencies
+echo ">_ Update dependencies ..."
+npm install -g npm
+npm update
 
 echo ">_ Install NPM dependencies ..."
 npm install
